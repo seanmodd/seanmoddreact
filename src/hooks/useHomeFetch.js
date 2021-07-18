@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import API from '../API';
+import { withAsync } from './withAsync';
 
 const initialState = {
   page: 0,
@@ -15,6 +16,7 @@ export default function useHomeFetch() {
   console.log('usehomneeftch');
 
   const fetchMovies = async (page, searchTerm = '') => {
+    console.log('in here');
     try {
       setError(false);
       setLoading(true);
@@ -35,9 +37,9 @@ export default function useHomeFetch() {
   };
 
   useEffect(() => {
-    fetchMovies(1);
     console.log('this', myMovies);
-  }, []);
+    fetchMovies(1);
+  }, [fetchMovies]);
 
   return { myMovies, loading, error };
 }
